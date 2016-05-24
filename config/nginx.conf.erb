@@ -53,6 +53,9 @@ http {
 		location /api {
 			proxy_pass <%= ENV["PROXY"] %>;
 		}
+		location /sitemap.xml {
+            proxy_pass <%= ENV["PROXY"] %>;
+        }
 		location ~* \.(css|js)\?rel=.*$ {
 			expires max;
 		}
