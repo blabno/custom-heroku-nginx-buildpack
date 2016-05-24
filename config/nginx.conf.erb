@@ -38,7 +38,7 @@ http {
 
 	server {
 		listen <%= ENV["PORT"] %>;
-        root /app/<%= ENV["ROOT"] %>;
+		root /app/<%= ENV["ROOT"] %>;
 		server_name _;
 		keepalive_timeout 5;
 		gzip on;
@@ -50,13 +50,10 @@ http {
 			try_files $uri @prerender;
 		}
 
-        location /api {
-            proxy_pass <%= ENV["PROXY"] %>;
-        }
-		location /scripts {
-			expires max;
+		location /api {
+			proxy_pass <%= ENV["PROXY"] %>;
 		}
-		location /styles {
+		location ~* \.(css|js)\?rel=.*$ {
 			expires max;
 		}
 
